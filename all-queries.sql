@@ -56,4 +56,10 @@ select sameAmount, count(*) as totalCount
 from (
 	select *, case when totalPaid = paidAmount then "Yes" else "No" end as sameAmount
 	from checkTable
-) tableCompared
+) tableCompared;
+
+-- See revenues in every year (2003 - 2005)
+select year(paymentDate) as paymentYear, monthname(paymentDate) as paymentMonth, sum(amount) as totalRevenue
+from payments
+group by 1, 2
+order by 1, month(paymentDate)
